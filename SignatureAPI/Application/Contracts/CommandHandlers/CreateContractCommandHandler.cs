@@ -1,7 +1,7 @@
 ﻿using MediatR;
+using SignatureAPI.Application.Contracts.Abstractions;
 using SignatureAPI.Application.Contracts.Commands;
 using SignatureAPI.Domain.Entities;
-using SignatureAPI.Persistence.Contracts;
 
 namespace SignatureAPI.Application.Contracts.CommandHandlers
 {

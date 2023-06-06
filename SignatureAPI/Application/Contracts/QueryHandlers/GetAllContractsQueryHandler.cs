@@ -1,10 +1,10 @@
 ﻿using MediatR;
+using SignatureAPI.Application.Contracts.Abstractions;
 using SignatureAPI.Application.Contracts.Queries;
-using SignatureAPI.Persistence.Contracts;
 
 namespace SignatureAPI.Application.Contracts.QueryHandlers
 {
-	public class GetAllContractsQueryHandler : IRequestHandler<GetContracts, GetContractsResponse>
+    public class GetAllContractsQueryHandler : IRequestHandler<GetContracts, GetContractsResponse>
 	{
 		private readonly IContractRepository _contractRepository;
 

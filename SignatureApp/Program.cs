@@ -13,20 +13,35 @@ using (var client = new HttpClient())
 		Console.WriteLine("Set Defendant Signature");
 		var defendantSignature = new Signature() { FullSignature = Console.ReadLine() };
 
-		var response = await CreateContract(client, plaintiffSignature, defendantSignature);
+		var response = await CreateContractAsync(client, plaintiffSignature, defendantSignature);
 
 		if (response.IsSuccessStatusCode)
 		{
 			var result = response.Content.ReadAsStringAsync().Result;
 			var contract = JsonConvert.DeserializeObject<Contract>(result);
 
-			var signature = await CompareSignatures(client, contract.Id);
+			if (defendantSignature.FullSignature.Contains('#') || plaintiffSignature.FullSignature.Contains('#'))
+			{
+				var signature = await CalculateMinSignatureAsync(client, contract.Id);
 
-			Console.WriteLine($"The winner is {signature.WinnerSignature.FullSignature}");
+				Console.WriteLine($"The minumum signature to win is {signature}");
+			}
+			else
+			{
+				var signature = await CompareSignaturesAsync(client, contract.Id);
+
+				Console.WriteLine($"The winner is {signature.WinnerSignature.FullSignature}");
+			}
 		}
 		else
 		{
-			Console.WriteLine(response.ReasonPhrase);
+			var result = response.Content.ReadAsStringAsync().Result;
+			var reponse = JsonConvert.DeserializeObject<Error>(result);
+
+			foreach(var error in reponse.Errors) 
+			{
+				Console.WriteLine(error);
+			}
 		}
 
 		Console.WriteLine("Press enter to continue, CTRL+C to exit");
@@ -34,7 +49,7 @@ using (var client = new HttpClient())
 	}
 }
 
-async static Task<HttpResponseMessage> CreateContract(HttpClient client, Signature plaintiffSignature, Signature defendantSignature)
+async static Task<HttpResponseMessage> CreateContractAsync(HttpClient client, Signature plaintiffSignature, Signature defendantSignature)
 {
 	var json = JsonConvert.SerializeObject(new CreateContract()
 	{
@@ -47,7 +62,7 @@ async static Task<HttpResponseMessage> CreateContract(HttpClient client, Signatu
 	return await client.PostAsync("/CreateContract", data);
 }
 
-async static Task<CompareSignatureResponse?> CompareSignatures(HttpClient client, Guid id)
+async static Task<CompareSignatureResponse?> CompareSignaturesAsync(HttpClient client, Guid id)
 {
 	var response = await client.GetAsync($"/CompareSignatures/{id}");
 
@@ -62,10 +77,30 @@ async static Task<CompareSignatureResponse?> CompareSignatures(HttpClient client
 	return null;
 }
 
+async static Task<string?> CalculateMinSignatureAsync(HttpClient client, Guid id)
+{
+	var response = await client.GetAsync($"/CalculateMinSignature/{id}");
+
+	if (response.IsSuccessStatusCode)
+	{
+		var result = response.Content.ReadAsStringAsync().Result;
+		var signature = JsonConvert.DeserializeObject<string>(result);
+
+		return await Task.FromResult(signature);
+	}
+
+	return null;
+}
+
 public class CreateContract
 {
 	public Signature PlaintiffSignature { get; set; }
 	public Signature DefendantSignature { get; set; }
+}
+
+public class Error
+{
+    public List<string> Errors { get; set; }
 }
 
 public class Signature

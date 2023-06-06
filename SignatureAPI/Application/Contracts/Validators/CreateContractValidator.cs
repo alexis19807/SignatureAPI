@@ -7,22 +7,28 @@ namespace SignatureAPI.Application.Contracts.Validators
 {
 	public class CreateContractValidator : AbstractValidator<CreateContract>
 	{
-        public CreateContractValidator()
+		private readonly Regex Regex = new Regex(@"^[KNVknv#]+$");
+
+		public CreateContractValidator()
         {
-			RuleFor(x => x.DefendantSignature)
-				.NotEmpty();
-
 			RuleFor(x => x.DefendantSignature.FullSignature)
-				.Matches(new Regex(@"^[KNVknv]+$"));
-
-			RuleFor(x => x.PlaintiffSignature)
-				.NotEmpty();
+				.NotEmpty()
+				.Matches(Regex)
+				.WithMessage("Defendant signature has to have a valid value");
 
 			RuleFor(x => x.PlaintiffSignature.FullSignature)
-				.Matches(new Regex(@"^[KNVknv]+$"));
+				.NotEmpty()
+				.Matches(Regex)
+				.WithMessage("Plaintiff signature has to have a valid value");
 
 			RuleFor(x => new { x.DefendantSignature, x.PlaintiffSignature })
-				.Must(x => x.DefendantSignature.FullSignature != x.PlaintiffSignature.FullSignature);
+				.Must(x => x.DefendantSignature.FullSignature != x.PlaintiffSignature.FullSignature)
+				.WithMessage("Plaintiff and Defendant signatures cannot be equals");
+
+			RuleFor(x => new { x.DefendantSignature, x.PlaintiffSignature })
+				.Must(x => !(x.DefendantSignature.FullSignature.Count(x => x == '#') > 1 
+					|| x.PlaintiffSignature.FullSignature.Count(x => x == '#') > 1))
+				.WithMessage("Plaintiff or Defendant signatures cannot have more than one special character each in the signature");
 		}
-    }
+	}
 }

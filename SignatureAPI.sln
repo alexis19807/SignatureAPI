@@ -5,10 +5,12 @@ VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignatureAPI", "SignatureAPI\SignatureAPI.csproj", "{FD4F24A9-9D20-4E9B-9FAC-3FE468AFE943}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignatureApp", "SignatureApp\SignatureApp.csproj", "{7432B626-9C63-4EC9-B877-6F2B35B5C4C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignatureApp", "SignatureApp\SignatureApp.csproj", "{7432B626-9C63-4EC9-B877-6F2B35B5C4C8}"
 	ProjectSection(ProjectDependencies) = postProject
 		{FD4F24A9-9D20-4E9B-9FAC-3FE468AFE943} = {FD4F24A9-9D20-4E9B-9FAC-3FE468AFE943}
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Tests.Unit", "Application-Tests.Unit7\Application.Tests.Unit.csproj", "{4F6C353A-21E5-49F7-A35D-B5B6F19CB9FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,6 +26,10 @@ Global
 		{7432B626-9C63-4EC9-B877-6F2B35B5C4C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7432B626-9C63-4EC9-B877-6F2B35B5C4C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7432B626-9C63-4EC9-B877-6F2B35B5C4C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F6C353A-21E5-49F7-A35D-B5B6F19CB9FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F6C353A-21E5-49F7-A35D-B5B6F19CB9FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F6C353A-21E5-49F7-A35D-B5B6F19CB9FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F6C353A-21E5-49F7-A35D-B5B6F19CB9FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

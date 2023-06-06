@@ -1,8 +1,9 @@
-﻿using SignatureAPI.Domain.Entities;
+﻿using SignatureAPI.Application.Signatures.Abstractions;
+using SignatureAPI.Domain.Enums;
 
 namespace SignatureAPI.Application.Signatures.Services
 {
-	public class GetSignaturePointsService : IGetSignaturePointsService
+    public class GetSignaturePointsService : IGetSignaturePointsService
 	{
 		public async Task<SignaturePointsResponse> GetSignatureTotalPoints(SignaturePoints request)
 		{

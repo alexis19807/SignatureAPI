@@ -1,4 +1,4 @@
-﻿namespace SignatureAPI.Domain.Entities
+﻿namespace SignatureAPI.Domain.Enums
 {
     public enum Rol
     {

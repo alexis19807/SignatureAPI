@@ -1,10 +1,11 @@
-﻿using SignatureAPI.Application.Contracts.Commands;
+﻿using SignatureAPI.Application.Contracts.Abstractions;
+using SignatureAPI.Application.Contracts.Commands;
 using SignatureAPI.Application.Contracts.Queries;
 using SignatureAPI.Domain.Entities;
 
 namespace SignatureAPI.Persistence.Contracts
 {
-	public class ContractRepository : IContractRepository
+    public class ContractRepository : IContractRepository
 	{
 		public List<Contract> Contracts = new List<Contract>();
 

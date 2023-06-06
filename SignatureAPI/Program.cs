@@ -1,8 +1,9 @@
 using Carter;
 using FluentValidation;
+using SignatureAPI.Application.Contracts.Abstractions;
 using SignatureAPI.Application.Contracts.Commands;
-using SignatureAPI.Application.Contracts.Services;
 using SignatureAPI.Application.Contracts.Validators;
+using SignatureAPI.Application.Signatures.Abstractions;
 using SignatureAPI.Application.Signatures.Services;
 using SignatureAPI.Domain.Entities;
 using SignatureAPI.Persistence.Contracts;
@@ -13,8 +14,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
-builder.Services.AddTransient<ICompareSignaturesService, CompareSignaturesService>();
-builder.Services.AddTransient<IGetSignaturePointsService, GetSignaturePointsService>();
+builder.Services.AddScoped<ICompareSignaturesService, CompareSignaturesService>();
+builder.Services.AddScoped<IGetSignaturePointsService, GetSignaturePointsService>();
+builder.Services.AddScoped<ICalculateMinSignatureToWinService, CalculateMinSignatureToWinService>();
 builder.Services.AddSingleton<IContractRepository, ContractRepository>();
 builder.Services.AddScoped<IValidator<CreateContract>, CreateContractValidator>();
 

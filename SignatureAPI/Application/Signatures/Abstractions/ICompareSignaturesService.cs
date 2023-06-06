@@ -1,4 +1,6 @@
-﻿namespace SignatureAPI.Application.Contracts.Services
+﻿using SignatureAPI.Application.Signatures.Services;
+
+namespace SignatureAPI.Application.Signatures.Abstractions
 {
     public interface ICompareSignaturesService
     {

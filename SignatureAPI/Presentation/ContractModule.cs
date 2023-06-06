@@ -3,18 +3,19 @@ using MediatR;
 using SignatureAPI.Application.Contracts.Commands;
 using SignatureAPI.Application.Contracts.Filters;
 using SignatureAPI.Application.Contracts.Queries;
-using SignatureAPI.Application.Contracts.Services;
+using SignatureAPI.Application.Signatures.Abstractions;
+using SignatureAPI.Domain.Entities;
+using System.Reflection;
 
 namespace SignatureAPI.Presentation
 {
-	public class ContractModule : ICarterModule
+    public class ContractModule : ICarterModule
 	{
-		public void AddRoutes(IEndpointRouteBuilder app)
+        public void AddRoutes(IEndpointRouteBuilder app)
 		{
 			app.MapPost("/CreateContract/", async (CreateContract contract, ISender sender) =>
 			{
-				var result = await sender.Send(contract);
-				return result.Id == null ? Results.BadRequest() : Results.Ok(result);
+				return await sender.Send(contract);
 			}).AddEndpointFilter<CreateContractFilter>();
 
 			app.MapGet("/GetContract/{id}", async (Guid id, ISender sender) =>
@@ -30,6 +31,11 @@ namespace SignatureAPI.Presentation
 			app.MapGet("/CompareSignatures/{id}", async (Guid id, ICompareSignaturesService compareSignaturesService) =>
 			{
 				return await compareSignaturesService.CompareSignatures(id);
+			});
+
+			app.MapGet("/CalculateMinSignature/{id}", async (Guid id, ICalculateMinSignatureToWinService calculateMinSignatureToWinService) =>
+			{
+				return await calculateMinSignatureToWinService.GetMinimunSignatureToWin(id);
 			});
 		}
 	}
