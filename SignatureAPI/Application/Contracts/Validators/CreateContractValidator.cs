@@ -14,11 +14,13 @@ namespace SignatureAPI.Application.Contracts.Validators
 			RuleFor(x => x.DefendantSignature.FullSignature)
 				.NotEmpty()
 				.Matches(Regex)
+				.MaximumLength(3)
 				.WithMessage("Defendant signature has to have a valid value");
 
 			RuleFor(x => x.PlaintiffSignature.FullSignature)
 				.NotEmpty()
 				.Matches(Regex)
+				.MaximumLength(3)
 				.WithMessage("Plaintiff signature has to have a valid value");
 
 			RuleFor(x => new { x.DefendantSignature, x.PlaintiffSignature })

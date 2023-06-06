@@ -6,7 +6,6 @@ namespace SignatureAPI.Application.Contracts.Abstractions
 {
     public interface IContractRepository
     {
-        Task<IEnumerable<Contract>> GetAllContracts();
         Task<Contract> GetContract(GetContract request);
         Task<CreateContractResponse> CreateContract(CreateContract request);
     }

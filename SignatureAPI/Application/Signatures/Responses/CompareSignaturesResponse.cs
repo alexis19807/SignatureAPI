@@ -1,6 +1,6 @@
 ﻿using SignatureAPI.Domain.Entities;
 
-namespace SignatureAPI.Application.Signatures.Services
+namespace SignatureAPI.Application.Signatures.Responses
 {
     public class CompareSignaturesResponse
     {

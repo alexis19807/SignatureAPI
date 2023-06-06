@@ -1,19 +1,20 @@
 ﻿using SignatureAPI.Application.Contracts.Abstractions;
 using SignatureAPI.Application.Contracts.Queries;
 using SignatureAPI.Application.Signatures.Abstractions;
+using SignatureAPI.Application.Signatures.Requests;
 using SignatureAPI.Domain.Enums;
 
 namespace SignatureAPI.Application.Signatures.Services
 {
-    public class CalculateMinSignatureToWinService : ICalculateMinSignatureToWinService
+	public class CalculateMinSignatureToWinService : ICalculateMinSignatureToWinService
 	{
 		private readonly IGetSignaturePointsService _getSignaturePointsService;
 		private readonly IContractRepository _contractRepository;
 
 		private readonly List<Rol> Roles = new List<Rol>() { Rol.V, Rol.N, Rol.K };
 
-	public CalculateMinSignatureToWinService(IGetSignaturePointsService getSignaturePointsService,
-			IContractRepository contractRepository)
+		public CalculateMinSignatureToWinService(IGetSignaturePointsService getSignaturePointsService,
+				IContractRepository contractRepository)
 		{
 			_getSignaturePointsService = getSignaturePointsService;
 			_contractRepository = contractRepository;
@@ -27,14 +28,14 @@ namespace SignatureAPI.Application.Signatures.Services
 			var pointsPlaintiff = await _getSignaturePointsService.GetSignatureTotalPoints(
 				new SignaturePoints()
 				{
-					Signature = contract.SignaturePlaintiff.FullSignature.ToUpperInvariant()
+					Signature = contract.SignaturePlaintiff?.FullSignature?.ToUpperInvariant()
 				}
 			);
 
 			var pointsDefendant = await _getSignaturePointsService.GetSignatureTotalPoints(
 				new SignaturePoints()
 				{
-					Signature = contract.SignatureDefendant.FullSignature.ToUpperInvariant()
+					Signature = contract.SignatureDefendant?.FullSignature?.ToUpperInvariant()
 				}
 			);
 

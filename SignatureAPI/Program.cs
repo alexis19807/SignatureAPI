@@ -5,7 +5,6 @@ using SignatureAPI.Application.Contracts.Commands;
 using SignatureAPI.Application.Contracts.Validators;
 using SignatureAPI.Application.Signatures.Abstractions;
 using SignatureAPI.Application.Signatures.Services;
-using SignatureAPI.Domain.Entities;
 using SignatureAPI.Persistence.Contracts;
 using System.Reflection;
 

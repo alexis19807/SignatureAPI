@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Security.Principal;
+using System.Text;
 using Newtonsoft.Json;
 
 using (var client = new HttpClient())
@@ -84,9 +85,9 @@ async static Task<string?> CalculateMinSignatureAsync(HttpClient client, Guid id
 	if (response.IsSuccessStatusCode)
 	{
 		var result = response.Content.ReadAsStringAsync().Result;
-		var signature = JsonConvert.DeserializeObject<string>(result);
+		var signature = JsonConvert.DeserializeObject<Rol>(result);
 
-		return await Task.FromResult(signature);
+		return await Task.FromResult(signature.ToString());
 	}
 
 	return null;
@@ -116,4 +117,11 @@ public class CompareSignatureResponse
 public class Contract
 {
 	public Guid Id { get; set; }
+}
+
+public enum Rol
+{
+	V = 1,
+	N = 2,
+	K = 5
 }

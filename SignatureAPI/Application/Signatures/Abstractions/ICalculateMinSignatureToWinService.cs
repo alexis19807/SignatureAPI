@@ -2,8 +2,8 @@
 
 namespace SignatureAPI.Application.Signatures.Abstractions
 {
-    public interface ICalculateMinSignatureToWinService
-    {
-        Task<Rol> GetMinimunSignatureToWin(Guid id);
-    }
+	public interface ICalculateMinSignatureToWinService
+	{
+		Task<Rol> GetMinimunSignatureToWin(Guid id);
+	}
 }

@@ -1,4 +1,6 @@
 ﻿using SignatureAPI.Application.Signatures.Abstractions;
+using SignatureAPI.Application.Signatures.Requests;
+using SignatureAPI.Application.Signatures.Responses;
 using SignatureAPI.Domain.Enums;
 
 namespace SignatureAPI.Application.Signatures.Services

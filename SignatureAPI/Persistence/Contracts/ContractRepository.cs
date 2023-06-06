@@ -9,11 +9,6 @@ namespace SignatureAPI.Persistence.Contracts
 	{
 		public List<Contract> Contracts = new List<Contract>();
 
-		public async Task<IEnumerable<Contract>> GetAllContracts()
-		{
-			return await Task.FromResult(Contracts);
-		}
-
 		public async Task<Contract> GetContract(GetContract request)
 		{
 			return await Task.FromResult(Contracts.FirstOrDefault(c => c.Id == request.Id) ?? new Contract());

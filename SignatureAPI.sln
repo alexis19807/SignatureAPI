@@ -10,7 +10,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignatureApp", "SignatureAp
 		{FD4F24A9-9D20-4E9B-9FAC-3FE468AFE943} = {FD4F24A9-9D20-4E9B-9FAC-3FE468AFE943}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Tests.Unit", "Application-Tests.Unit7\Application.Tests.Unit.csproj", "{4F6C353A-21E5-49F7-A35D-B5B6F19CB9FF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Tests.Unit", "Application.Tests.Unit\Application.Tests.Unit.csproj", "{4F6C353A-21E5-49F7-A35D-B5B6F19CB9FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

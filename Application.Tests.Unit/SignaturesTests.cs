@@ -1,17 +1,17 @@
 using SignatureAPI.Application.Contracts.Abstractions;
 using SignatureAPI.Application.Signatures.Abstractions;
+using SignatureAPI.Application.Signatures.Requests;
 using SignatureAPI.Application.Signatures.Services;
 using SignatureAPI.Domain.Entities;
 using SignatureAPI.Domain.Enums;
 using SignatureAPI.Persistence.Contracts;
+using Xunit;
 
 namespace Application.Tests.Unit
 {
 	public class SignaturesTests
 	{
 		private readonly IGetSignaturePointsService _getSignaturePointsService;
-		private readonly ICompareSignaturesService _compareSignaturesService;
-		private readonly ICalculateMinSignatureToWinService _calculateMinSignatureToWinService;
 		private readonly IContractRepository _contractRepository;
 
 		private readonly List<Rol> Roles = new List<Rol>() { Rol.V, Rol.N, Rol.K };
@@ -20,8 +20,6 @@ namespace Application.Tests.Unit
 		{
 			_getSignaturePointsService = new GetSignaturePointsService();
 			_contractRepository = new ContractRepository();
-			_compareSignaturesService = new CompareSignaturesService(_getSignaturePointsService, _contractRepository);
-			_calculateMinSignatureToWinService = new CalculateMinSignatureToWinService(_getSignaturePointsService, _contractRepository);
 		}
 
 		[Fact]
@@ -49,10 +47,10 @@ namespace Application.Tests.Unit
 			);
 
 			var total = Math.Abs(pointsPlaintiff.Points - pointsDefendant.Points);
-
+			
 			var signatureToWin = Roles.Where(x => (int)x > total).First();
 
-			Assert.Equal(Rol.N, signatureToWin);
+			Assert.Equal(Rol.N.ToString(), signatureToWin.ToString());
 		}
 
 		[Fact]

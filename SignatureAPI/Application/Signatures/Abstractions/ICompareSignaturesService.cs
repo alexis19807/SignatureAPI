@@ -1,4 +1,4 @@
-﻿using SignatureAPI.Application.Signatures.Services;
+﻿using SignatureAPI.Application.Signatures.Responses;
 
 namespace SignatureAPI.Application.Signatures.Abstractions
 {
